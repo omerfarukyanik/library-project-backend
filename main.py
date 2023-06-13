@@ -4,7 +4,7 @@ import os
 from flask import Flask, request, jsonify, flash, redirect, url_for, send_file, make_response, Response
 from flask_cors import CORS, cross_origin
 from sqlalchemy import create_engine
-# from sqlalchemy.sql import text
+from sqlalchemy.sql import text
 from utils.const import UPLOAD_FOLDER, MAX_CONTENT_LENGTH, SECRET_KEY, PORT_NUMBER
 from utils.util_funcs import allowed_file
 from werkzeug.utils import secure_filename
@@ -83,8 +83,10 @@ if __name__ == '__main__':
     app.config["CORS_HEADERS"] = "Content-Type"
     # blueprint for auth routes in our app
     from auth import auth as auth_blueprint
+    from admin import admin as admin_blueprint
 
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(admin_blueprint)
 
     # blueprint for non-auth parts of app
     # from main import main as main_blueprint
